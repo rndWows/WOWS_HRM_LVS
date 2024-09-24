@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form ứng tuyển</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.4/luxon.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .input-icon {
+            position: absolute;
+            top: 72%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #6B7280;
+            pointer-events: none;
+        }
+
+        .input-with-icon {
+            padding-left: 40px;
+            border: 3px solid #D1D5DB;
+            /* Tăng độ dày viền */
+            border-radius: 0.5rem;
+            /* Tăng độ cong của góc */
+        }
+
+        .input-with-icon:focus {
+            border-color: #4F46E5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        .fixed-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 600px;
+            z-index: 1000;
+        }
+
+        .form-container {
+            padding-bottom: 80px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl p-6 mt-10 mb-20 fade-in">
+        <h2 class="text-3xl font-bold mb-6 text-center text-indigo-600">Form ứng tuyển</h2>
+        <form id="expenseForm" class="space-y-6">
+            <div class="relative">
+                <i data-lucide="briefcase" class="input-icon"></i>
+                <label for="viTriUngTuyen" class="block text-sm font-medium text-gray-700 mb-1">Vị trí ứng tuyển</label>
+                <select id="viTriUngTuyen" name="viTriUngTuyen"
+                    class="input-with-icon mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    required>
+                    <option value="">Chọn vị trí ứng tuyển</option>
+                    <option value="Kế toán">Kế toán</option>
+                    <option value="Dự án">Dự án</option>
+                    <option value="Giám đốc">Giám đốc</option>
+                </select>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="user" class="input-icon"></i>
+                <label for="hoVaTen" class="block text-sm font-medium text-gray-700 mb-1">Họ và tên</label>
+                <input type="text" id="hoVaTen" name="hoVaTen"
+                    class="input-with-icon mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    required>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="phone" class="input-icon"></i>
+                <label for="soDienThoai" class="block text-sm font-medium text-gray-700 mb-1">Số điện thoại</label>
+                <input type="tel" id="soDienThoai" name="soDienThoai"
+                    class="input-with-icon mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    required>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="mail" class="input-icon"></i>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input type="email" id="email" name="email"
+                    class="input-with-icon mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    required>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="calendar" class="input-icon"></i>
+                <label for="ngaySinh" class="block text-sm font-medium text-gray-700 mb-1">Ngày sinh:</label>
+                <input type="date" id="ngaySinh" name="ngaySinh"
+                    class="input-with-icon mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    required>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="users" class="input-icon"></i>
+                <label for="gioiTinh" class="block text-sm font-medium text-gray-700 mb-1">Giới tính</label>
+                <select id="gioiTinh" name="gioiTinh"
+                    class="input-with-icon mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    required>
+                    <option value="">Chọn giới tính</option>
+                    <option value="Nam">Nam</option>
+                    <option value="Nữ">Nữ</option>
+                    <option value="Khác">Khác</option>
+                </select>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="map-pin" class="input-icon"></i>
+                <label for="diaChi" class="block text-sm font-medium text-gray-700 mb-1">Địa chỉ</label>
+                <textarea id="diaChi" name="diaChi" rows="3"
+                    class="input-with-icon mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="book" class="input-icon"></i>
+                <label for="trinhDo" class="block text-sm font-medium text-gray-700 mb-1">Trình độ</label>
+                <input type="text" id="trinhDo" name="trinhDo"
+                    class="input-with-icon mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            </div>
+
+            <div class="relative">
+                <i data-lucide="school" class="input-icon"></i>
+                <label for="noiDaoTao" class="block text-sm font-medium text-gray-700 mb-1">Nơi đào tạo</label>
+                <input type="text" id="noiDaoTao" name="noiDaoTao"
+                    class="input-with-icon mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            </div>
+
+            <div class="relative">
+                <i data-lucide="book-open" class="input-icon"></i>
+                <label for="chuyenNganh" class="block text-sm font-medium text-gray-700 mb-1">Chuyên Ngành</label>
+                <input type="text" id="chuyenNganh" name="chuyenNganh"
+                    class="input-with-icon mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            </div>
+
+            <div class="relative">
+                <i data-lucide="briefcase" class="input-icon"></i>
+                <label for="noiLamViec" class="block text-sm font-medium text-gray-700 mb-1">Nơi làm việc gần
+                    nhất</label>
+                <input type="text" id="noiLamViec" name="noiLamViec"
+                    class="input-with-icon mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            </div>
+
+            <div class="relative">
+                <label for="fileHS" class="block text-sm font-medium text-gray-700 mb-1">File hồ sơ</label>
+                <input type="file" id="fileHS" name="fileHS"
+                    class="input-with-icon mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+            </div>
+
+            <div class="fixed-button">
+                <button type="submit"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                    Gửi
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Constants for AppSheet API
+        const appId = 'c99c8a08-b6cf-4a71-89e7-2b913c7f45be';
+        const accessKey = 'V2-tKXHx-Qri8Z-oevxi-062rn-BGIWj-7eYMM-Uo9nY-USAAM';
+        const region = 'www';
+        function apiRequest(tableName, action, data) {
+            const apiUrl = `https://${region}.appsheet.com/api/v2/apps/${appId}/tables/${tableName}/Action`;
+            return $.ajax({
+                url: apiUrl,
+                method: 'POST',
+                headers: {
+                    'ApplicationAccessKey': accessKey,
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify({
+                    Action: action,
+                    Properties: {
+                        Locale: 'vi-VN',
+                        Timezone: 'Asia/Ho_Chi_Minh'
+                    },
+                    ...data
+                })
+            }).then(response => {
+                return response;
+            }).catch(error => {
+
+                throw error;
+            });
+        }
+
+        function readFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+
+            });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            lucide.createIcons();
+
+            // Cập nhật xử lý gửi form
+            document.getElementById('expenseForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                // Kiểm tra các trường bắt buộc
+                const requiredFields = ['viTriUngTuyen', 'hoVaTen', 'soDienThoai', 'email'];
+                const missingFields = [];
+
+                requiredFields.forEach(field => {
+                    const input = this.elements[field];
+                    if (!input.value.trim()) {
+                        missingFields.push(input.previousElementSibling.textContent);
+                    }
+                });
+
+                if (missingFields.length > 0) {
+                    // Hiển thị thông báo lỗi nếu thiếu thông tin
+                    Toastify({
+                        text: `Vui lòng nhập đầy đủ thông tin: ${missingFields.join(', ')}`,
+                        duration: 4000,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                    }).showToast();
+                    return;
+                }
+
+                // Thu thập dữ liệu form
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData.entries());
+
+
+
+
+                const fileInput = document.getElementById('fileHS');
+                let filebase = "";
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    filebase = await readFile(file);
+                }
+                // Log dữ liệu ra console
+                console.log('Form Data:', data);
+                const ungVienData = {
+                    "VỊ TRÍ ỨNG TUYỂN": data.viTriUngTuyen,
+
+                    "HỌ VÀ TÊN": data.hoVaTen,
+                    "SỐ ĐIỆN THOẠI": data.soDienThoai,
+                    "EMAIL": data.email,
+                    "NGÀY/THÁNG/NĂM/SINH": data.ngaySinh,
+                    "GIỚI TÍNH": data.gioiTinh,
+                    "ĐỊA CHỈ HIỆN TẠI": data.diaChi,
+                    "TRÌNH ĐỘ ĐÀO TẠO": data.trinhDo,
+                    "NƠI ĐÀO TẠO": data.noiDaoTao,
+                    "CHUYÊN NGHÀNH": data.chuyenNganh,
+                    "NƠI LÀM VIỆC  GẦN NHẤT": data.noiLamViec,
+                    "FILE HỒ SƠ ỨNG VIÊN": filebase
+
+                };
+
+                console.log(ungVienData);
+                disableForm();
+                showLoadingOverlay();
+                const duAnResponse = await apiRequest('HCNS_HSUV', 'Add', {
+                    Rows: [ungVienData]
+                });
+
+
+
+
+                // Hiển thị thông báo thành công
+                Toastify({
+                    text: "Form đã được gửi thành công!",
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                }).showToast();
+
+                this.reset();
+
+
+
+                enableForm();
+                hideLoadingOverlay();
+            });
+        });
+        // Hàm để disable form
+        function disableForm() {
+            const form = document.getElementById('expenseForm');
+            const elements = form.elements;
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].disabled = true;
+            }
+        }
+
+        // Hàm để enable form
+        function enableForm() {
+            const form = document.getElementById('expenseForm');
+            const elements = form.elements;
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].disabled = false;
+            }
+        }
+
+        // Hàm để hiển thị loading overlay
+        function showLoadingOverlay() {
+            const overlay = document.createElement('div');
+            overlay.id = 'loadingOverlay';
+            overlay.style.position = 'fixed';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+            overlay.style.display = 'flex';
+            overlay.style.justifyContent = 'center';
+            overlay.style.alignItems = 'center';
+            overlay.style.zIndex = '9999';
+
+            const spinner = document.createElement('div');
+            spinner.style.border = '4px solid #f3f3f3';
+            spinner.style.borderTop = '4px solid #3498db';
+            spinner.style.borderRadius = '50%';
+            spinner.style.width = '50px';
+            spinner.style.height = '50px';
+            spinner.style.animation = 'spin 1s linear infinite';
+
+            const keyframes = document.createElement('style');
+            keyframes.textContent = `
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+
+            document.head.appendChild(keyframes);
+            overlay.appendChild(spinner);
+            document.body.appendChild(overlay);
+        }
+
+        // Hàm để ẩn loading overlay
+        function hideLoadingOverlay() {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+                overlay.remove();
+            }
+        }
+
+    </script>
+</body>
+
+</html>
